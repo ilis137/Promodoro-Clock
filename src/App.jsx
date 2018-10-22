@@ -7,6 +7,46 @@ import Col from "react-bootstrap/lib/Col";
 import Button from "react-bootstrap/lib/Button";
 import ButtonGroup from "react-bootstrap/lib/ButtonGroup";
 class App extends Component {
+  state = {
+    sessionTime: 0.1 * 60,
+    breakTime: 5 * 60,
+    timerValue: "00:06"
+  };
+
+  handleStart = () => {
+    const time = this.state.timerValue.split(":");
+    const mins = Number.parseInt(time[0], 10);
+    const secs = Number.parseInt(time[1], 10);
+    console.log(mins + ":" + secs);
+    const timeLeft = mins * 60 + secs;
+    let seconds =
+      this.state.sessionTime > timeLeft ? timeLeft : this.state.sessionTime;
+    this.countdown = setInterval(() => {
+      seconds = --seconds;
+      if (seconds < 0) {
+        clearInterval(this.countdown);
+        return;
+      }
+      this.displayTimeLeft(seconds);
+    }, 1000);
+  };
+  displayTimeLeft = seconds => {
+    const mins = Math.floor(seconds / 60);
+    const secondsLeft = seconds % 60;
+    this.setState({
+      timerValue:
+        mins + ":" + (secondsLeft < 10 ? "0" + secondsLeft : secondsLeft)
+    });
+  };
+  handlePause = () => {
+    clearInterval(this.countdown);
+  };
+  handleRefresh = () => {
+    clearInterval(this.countdown);
+    this.setState({
+      timerValue: "00:06"
+    });
+  };
   render() {
     return (
       <div className="App">
@@ -29,16 +69,22 @@ class App extends Component {
           <Row className="timerRow">
             <Col className="timerCol">
               <div className="timer-container">
-                <span>Time</span>
+                <span>{this.state.timerValue}</span>
               </div>
             </Col>
           </Row>
           <ButtonGroup className="buttonRow">
-            <Button>Start</Button>
+            <Button className="start" onClick={this.handleStart}>
+              Start
+            </Button>
 
-            <Button>Pause</Button>
+            <Button className="pause" onClick={this.handlePause}>
+              Pause
+            </Button>
 
-            <Button>Refresh</Button>
+            <Button className="refresh" onClick={this.handleRefresh}>
+              Refresh
+            </Button>
           </ButtonGroup>
         </Grid>
       </div>
