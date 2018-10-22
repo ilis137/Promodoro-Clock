@@ -10,15 +10,11 @@ class App extends Component {
   state = {
     sessionTime: 0.1 * 60,
     breakTime: 5 * 60,
-    timerValue: "00:06"
+    timerValue: 0.1 * 60
   };
 
   handleStart = () => {
-    const time = this.state.timerValue.split(":");
-    const mins = Number.parseInt(time[0], 10);
-    const secs = Number.parseInt(time[1], 10);
-    console.log(mins + ":" + secs);
-    const timeLeft = mins * 60 + secs;
+    const timeLeft = this.state.timerValue;
     let seconds =
       this.state.sessionTime > timeLeft ? timeLeft : this.state.sessionTime;
     this.countdown = setInterval(() => {
@@ -27,27 +23,27 @@ class App extends Component {
         clearInterval(this.countdown);
         return;
       }
-      this.displayTimeLeft(seconds);
+      this.setState({
+        timerValue: seconds
+      });
     }, 1000);
   };
-  displayTimeLeft = seconds => {
-    const mins = Math.floor(seconds / 60);
-    const secondsLeft = seconds % 60;
-    this.setState({
-      timerValue:
-        mins + ":" + (secondsLeft < 10 ? "0" + secondsLeft : secondsLeft)
-    });
-  };
+
   handlePause = () => {
     clearInterval(this.countdown);
   };
   handleRefresh = () => {
     clearInterval(this.countdown);
     this.setState({
-      timerValue: "00:06"
+      timerValue: 0.1 * 60
     });
   };
   render() {
+    const secs = this.state.timerValue;
+    const mins = Math.floor(secs / 60);
+    const secondsLeft = secs % 60;
+    const timeLeft =
+      mins + ":" + (secondsLeft < 10 ? "0" + secondsLeft : secondsLeft);
     return (
       <div className="App">
         <h1>Promodoro Clock</h1>
@@ -69,7 +65,7 @@ class App extends Component {
           <Row className="timerRow">
             <Col className="timerCol">
               <div className="timer-container">
-                <span>{this.state.timerValue}</span>
+                <span>{timeLeft}</span>
               </div>
             </Col>
           </Row>
