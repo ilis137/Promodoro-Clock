@@ -23,7 +23,7 @@ body {
     justify-content: center;
 }
 
-span {
+h1 {
     position: relative;
-    top: 50%;
+    top: 40%;
 }
