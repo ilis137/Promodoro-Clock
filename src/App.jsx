@@ -3,10 +3,12 @@ import React, { Component } from "react";
 import "./App.css";
 import Grid from "react-bootstrap/lib/Grid";
 import Row from "react-bootstrap/lib/Row";
-import Col from "react-bootstrap/lib/Col";
-import Button from "react-bootstrap/lib/Button";
-import ButtonGroup from "react-bootstrap/lib/ButtonGroup";
+
 import SessionTime from "./components/SessionTime";
+import BreakTime from "./components/BreakTime";
+import Timer from "./components/Timer";
+import ControlPanel from "./components/ControlPanel";
+
 class App extends Component {
   state = {
     sessionTime: 25 * 60,
@@ -41,6 +43,7 @@ class App extends Component {
     });
     clearInterval(this.countdown);
   };
+
   handleRefresh = () => {
     clearInterval(this.countdown);
     this.setState({
@@ -48,6 +51,7 @@ class App extends Component {
       timerStatus: "off"
     });
   };
+
   handleIncrement = e => {
     e.target.className === "incrementSession"
       ? this.state.sessionTimer
@@ -76,6 +80,7 @@ class App extends Component {
     console.log(this.state.sessionTime);
     console.log(this.state.breakTime);
   };
+
   handleDecrement = e => {
     e.target.className === "decrementSession"
       ? this.state.sessionTimer
@@ -104,12 +109,14 @@ class App extends Component {
     console.log(this.state.sessionTime);
     console.log(this.state.breakTime);
   };
+
   render() {
     const secs = this.state.timerValue;
     const mins = Math.floor(secs / 60);
     const secondsLeft = secs % 60;
     const timeLeft =
       mins + ":" + (secondsLeft < 10 ? "0" + secondsLeft : secondsLeft);
+
     return (
       <div className="App">
         <h1>Promodoro Clock</h1>
@@ -120,45 +127,18 @@ class App extends Component {
               sessionTime={this.state.sessionTime}
               decrementSession={e => this.handleDecrement(e)}
             />
-            <Col className="Break-time text-center" sm={6}>
-              <div>Break time</div>
-              <a
-                href="#"
-                className="incrementBreak"
-                onClick={e => this.handleIncrement(e)}
-              >
-                +
-              </a>
-              <span>{Math.floor(this.state.breakTime / 60)}</span>
-              <a
-                href="#"
-                className="decrementBreak"
-                onClick={e => this.handleDecrement(e)}
-              >
-                -
-              </a>
-            </Col>
+            <BreakTime
+              incrementBreak={e => this.handleIncrement(e)}
+              BreakTime={this.state.breakTime}
+              decrementBreak={e => this.handleDecrement(e)}
+            />
           </Row>
-          <Row className="timerRow">
-            <Col className="timerCol">
-              <div className="timer-container">
-                <h1>{timeLeft}</h1>
-              </div>
-            </Col>
-          </Row>
-          <ButtonGroup className="buttonRow">
-            <Button className="start" onClick={this.handleStart}>
-              Start
-            </Button>
-
-            <Button className="pause" onClick={this.handlePause}>
-              Pause
-            </Button>
-
-            <Button className="refresh" onClick={this.handleRefresh}>
-              Refresh
-            </Button>
-          </ButtonGroup>
+          <Timer timeLeft={timeLeft} />
+          <ControlPanel
+            handleStart={this.handleStart}
+            handlePause={this.handlePause}
+            handleRefresh={this.handleRefresh}
+          />
         </Grid>
       </div>
     );
