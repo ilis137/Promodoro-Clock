@@ -1,0 +1,23 @@
+.timer-container {
+    width: 300px;
+    height: 300px;
+    border: solid #81c784 5px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.timerRow {
+    padding: 40px;
+}
+
+.time {
+    position: relative;
+    top: 30%;
+    color: #69f0ae;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 60px;
+}
+
+.time-setters {
+    margin-top: 20px;
+}

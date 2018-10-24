@@ -8,22 +8,10 @@ html {
 
 body {
     height: 100%;
+    background: #e8f5e9;
 }
 
-.timer-container {
-    width: 300px;
-    height: 300px;
-    border: solid blue 10px;
-    border-radius: 50%;
-    margin: 0 auto;
-}
-
-.buttonRow {
-    display: flex;
-    justify-content: center;
-}
-
-h1 {
-    position: relative;
-    top: 40%;
+.Title {
+    opacity: 0.8;
+    color: #4caf50
 }

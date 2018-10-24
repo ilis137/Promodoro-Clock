@@ -1,11 +1,11 @@
 import React from "react";
 
 import Col from "react-bootstrap/lib/Col";
-
+import "./BreakTime.css";
 const BreakTime = props => {
   return (
     <Col className="Break-time text-center" sm={6}>
-      <div>Break time</div>
+      <div className="BreakTime_Title">Break Time</div>
       <a href="#" className="incrementBreak" onClick={props.incrementBreak}>
         +
       </a>

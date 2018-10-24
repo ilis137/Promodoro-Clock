@@ -1,0 +1,33 @@
+.BreakTime_Title {
+    font-size: 26px;
+    font-weight: 400;
+    color: #69f0ae
+}
+
+span {
+    font-size: 36px;
+    font-weight: 300;
+    color: #69f0ae;
+}
+
+.incrementBreak,
+.incrementBreak:hover,
+.incrementBreak:focus {
+    font-size: 38px;
+    font-weight: 800;
+    padding: 25px;
+    text-decoration: none;
+    text-decoration-line: none;
+    color: #69f0ae
+}
+
+.decrementBreak,
+.decrementBreak:focus,
+.decrementBreak:hover {
+    font-size: 38px;
+    font-weight: 800;
+    padding: 25px;
+    text-decoration: none;
+    text-decoration-line: none;
+    color: #69f0ae
+}

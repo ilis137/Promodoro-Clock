@@ -1,11 +1,11 @@
 import React from "react";
 
 import Col from "react-bootstrap/lib/Col";
-
+import "./SessionTime.css";
 const SessionTime = props => {
   return (
     <Col className="Session-time text-center" sm={6}>
-      <div>Session time</div>
+      <div className="SessionTime_Title">Session time</div>
       <a href="#" className="incrementSession" onClick={props.incrementSession}>
         +
       </a>

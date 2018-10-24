@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-
 import "./App.css";
 import Grid from "react-bootstrap/lib/Grid";
 import Row from "react-bootstrap/lib/Row";
-
 import SessionTime from "./components/SessionTime";
 import BreakTime from "./components/BreakTime";
 import Timer from "./components/Timer";
@@ -119,7 +117,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <h1>Promodoro Clock</h1>
+        <h1 className="Title">Promodoro Clock</h1>
         <Grid className="main-container">
           <Row className="time-setters">
             <SessionTime
