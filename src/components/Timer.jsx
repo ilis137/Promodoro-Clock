@@ -7,7 +7,7 @@ const Timer = props => {
     <Row className="timerRow">
       <Col className="timerCol">
         <div className="timer-container">
-          <h1 class="time">{props.timeLeft}</h1>
+          <h1 className="time">{props.timeLeft}</h1>
         </div>
       </Col>
     </Row>

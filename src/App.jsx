@@ -11,9 +11,11 @@ class App extends Component {
   state = {
     sessionTime: 25 * 60,
     breakTime: 5 * 60,
-    timerValue: 25 * 60,
+    timerValue: 0.05 * 60,
     sessionTimer: true,
-    timerStatus: "off"
+    timerStatus: "off",
+    timeOut: false,
+    playing: false
   };
 
   handleStart = () => {
@@ -22,6 +24,7 @@ class App extends Component {
       this.state.sessionTime > timeLeft ? timeLeft : this.state.sessionTime;
     this.countdown = setInterval(() => {
       seconds = --seconds;
+      seconds === 0 && this.setState({ timeOut: true });
       if (seconds < 0) {
         this.setState({ sessionTimer: !this.state.sessionTimer });
         seconds = this.state.sessionTimer
@@ -107,6 +110,17 @@ class App extends Component {
     console.log(this.state.sessionTime);
     console.log(this.state.breakTime);
   };
+  playSound = () => {
+    const audio = new Audio("https://goo.gl/65cBl1");
+    this.setState({ playing: true });
+    audio.play();
+
+    console.log(audio.play() == true);
+    setTimeout(() => {
+      this.setState({ timeOut: false });
+      this.setState({ playing: false });
+    }, 10000);
+  };
 
   render() {
     const secs = this.state.timerValue;
@@ -114,7 +128,7 @@ class App extends Component {
     const secondsLeft = secs % 60;
     const timeLeft =
       mins + ":" + (secondsLeft < 10 ? "0" + secondsLeft : secondsLeft);
-
+    this.state.timeOut && !this.state.playing && this.playSound();
     return (
       <div className="App">
         <h1 className="Title">Promodoro Clock</h1>
