@@ -121,14 +121,16 @@ class App extends Component {
       this.setState({ playing: false });
     }, 10000);
   };
-
+  componentDidUpdate() {
+    this.state.timeOut && !this.state.playing && this.playSound();
+  }
   render() {
     const secs = this.state.timerValue;
     const mins = Math.floor(secs / 60);
     const secondsLeft = secs % 60;
     const timeLeft =
       mins + ":" + (secondsLeft < 10 ? "0" + secondsLeft : secondsLeft);
-    this.state.timeOut && !this.state.playing && this.playSound();
+
     return (
       <div className="App">
         <h1 className="Title">Promodoro Clock</h1>
